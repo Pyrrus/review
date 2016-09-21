@@ -8,7 +8,6 @@ public class Game {
   private String game_type;
   private String description;
   private String year;
-  private int review_id;
   private int platform_id;
 
   public Game(String name, String game_type, String description, String year, int platform_id) {
