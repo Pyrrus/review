@@ -30,21 +30,20 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: game; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: games; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
-CREATE TABLE game (
+CREATE TABLE games (
     id integer NOT NULL,
     name character varying,
     game_type character varying,
     description text,
     year character varying,
-    review_id integer,
     platform_id integer
 );
 
 
-ALTER TABLE game OWNER TO "Guest";
+ALTER TABLE games OWNER TO "Guest";
 
 --
 -- Name: game_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
@@ -64,21 +63,20 @@ ALTER TABLE game_id_seq OWNER TO "Guest";
 -- Name: game_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
-ALTER SEQUENCE game_id_seq OWNED BY game.id;
+ALTER SEQUENCE game_id_seq OWNED BY games.id;
 
 
 --
--- Name: platform; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: platforms; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
-CREATE TABLE platform (
+CREATE TABLE platforms (
     id integer NOT NULL,
-    name character varying,
-    game_id integer
+    name character varying
 );
 
 
-ALTER TABLE platform OWNER TO "Guest";
+ALTER TABLE platforms OWNER TO "Guest";
 
 --
 -- Name: platform_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
@@ -98,14 +96,14 @@ ALTER TABLE platform_id_seq OWNER TO "Guest";
 -- Name: platform_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
-ALTER SEQUENCE platform_id_seq OWNED BY platform.id;
+ALTER SEQUENCE platform_id_seq OWNED BY platforms.id;
 
 
 --
--- Name: review; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: reviews; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
-CREATE TABLE review (
+CREATE TABLE reviews (
     id integer NOT NULL,
     name character varying,
     content text,
@@ -114,7 +112,7 @@ CREATE TABLE review (
 );
 
 
-ALTER TABLE review OWNER TO "Guest";
+ALTER TABLE reviews OWNER TO "Guest";
 
 --
 -- Name: review_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
@@ -134,36 +132,28 @@ ALTER TABLE review_id_seq OWNER TO "Guest";
 -- Name: review_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
-ALTER SEQUENCE review_id_seq OWNED BY review.id;
+ALTER SEQUENCE review_id_seq OWNED BY reviews.id;
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY game ALTER COLUMN id SET DEFAULT nextval('game_id_seq'::regclass);
+ALTER TABLE ONLY games ALTER COLUMN id SET DEFAULT nextval('game_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY platform ALTER COLUMN id SET DEFAULT nextval('platform_id_seq'::regclass);
+ALTER TABLE ONLY platforms ALTER COLUMN id SET DEFAULT nextval('platform_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY review ALTER COLUMN id SET DEFAULT nextval('review_id_seq'::regclass);
-
-
---
--- Data for Name: game; Type: TABLE DATA; Schema: public; Owner: Guest
---
-
-COPY game (id, name, game_type, description, year, review_id, platform_id) FROM stdin;
-\.
+ALTER TABLE ONLY reviews ALTER COLUMN id SET DEFAULT nextval('review_id_seq'::regclass);
 
 
 --
@@ -174,10 +164,10 @@ SELECT pg_catalog.setval('game_id_seq', 1, false);
 
 
 --
--- Data for Name: platform; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY platform (id, name, game_id) FROM stdin;
+COPY games (id, name, game_type, description, year, platform_id) FROM stdin;
 \.
 
 
@@ -189,10 +179,10 @@ SELECT pg_catalog.setval('platform_id_seq', 1, false);
 
 
 --
--- Data for Name: review; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Data for Name: platforms; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY review (id, name, content, created_at, game_id) FROM stdin;
+COPY platforms (id, name) FROM stdin;
 \.
 
 
@@ -204,10 +194,18 @@ SELECT pg_catalog.setval('review_id_seq', 1, false);
 
 
 --
+-- Data for Name: reviews; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY reviews (id, name, content, created_at, game_id) FROM stdin;
+\.
+
+
+--
 -- Name: game_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-ALTER TABLE ONLY game
+ALTER TABLE ONLY games
     ADD CONSTRAINT game_pkey PRIMARY KEY (id);
 
 
@@ -215,7 +213,7 @@ ALTER TABLE ONLY game
 -- Name: platform_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-ALTER TABLE ONLY platform
+ALTER TABLE ONLY platforms
     ADD CONSTRAINT platform_pkey PRIMARY KEY (id);
 
 
@@ -223,7 +221,7 @@ ALTER TABLE ONLY platform
 -- Name: review_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-ALTER TABLE ONLY review
+ALTER TABLE ONLY reviews
     ADD CONSTRAINT review_pkey PRIMARY KEY (id);
 
 

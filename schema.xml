@@ -37,7 +37,7 @@
 		<type label="SET" length="1" sql="SET" quote=""/>
 		<type label="Bit" length="0" sql="bit" quote=""/>
 	</group>
-</datatypes><table x="699" y="102" name="review">
+</datatypes><table x="699" y="102" name="reviews">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -52,13 +52,13 @@
 <default>NULL</default></row>
 <row name="game_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="game" row="id" />
+<default>NULL</default><relation table="games" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="500" y="101" name="game">
+<table x="501" y="100" name="games">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -74,29 +74,21 @@
 <row name="year" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="review_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="review" row="id" />
-</row>
 <row name="platform_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="platform" row="id" />
+<default>NULL</default><relation table="platforms" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="333" y="102" name="platform">
+<table x="326" y="101" name="platforms">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
 <row name="name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="game_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="game" row="id" />
-</row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>

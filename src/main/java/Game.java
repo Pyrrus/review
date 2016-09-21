@@ -59,7 +59,7 @@ public class Game {
 
   public void save() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO game (name, game_type, description, year, platform_id) VALUES (:name, :game_type, :description, :year, :platform_id)";
+      String sql = "INSERT INTO games (name, game_type, description, year, platform_id) VALUES (:name, :game_type, :description, :year, :platform_id)";
       this.id = (int) con.createQuery(sql, true)
       .addParameter("name", this.name)
       .addParameter("game_type", this.game_type)
@@ -73,14 +73,14 @@ public class Game {
 
   public static List<Game> all() {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM game";
+      String sql = "SELECT * FROM games";
       return con.createQuery(sql).executeAndFetch(Game.class);
     }
   }
 
   public static Game find(int id) {
     try (Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM game WHERE id=:id";
+      String sql = "SELECT * FROM games WHERE id=:id";
       Game game = con.createQuery(sql).addParameter("id", id).executeAndFetchFirst(Game.class);
       return game;
     }
