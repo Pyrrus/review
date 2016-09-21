@@ -23,7 +23,7 @@ This program stores words in a personal dictionary and allows you to add multipl
 
 * Clone this repository to your desktop: `$ git clone https://github.com/CGrahamS/review`
 
-* In the terminal, navigate to /dictionary by typing `$ cd Desktop/dictionary`
+* In the terminal, navigate to /dictionary by typing `$ cd Desktop/review`
 
 * Run the program by typing in the terminal: `$ gradle run`
 
@@ -46,4 +46,4 @@ Velocity_
 
 This webpage is licensed under the GPL license.
 
-Copyright &copy; 2016 **_Caleb Stevenson_**
+Copyright &copy; 2016 **_Caleb Stevenson &amp; Adam Gorbahn_**
