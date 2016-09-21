@@ -80,13 +80,13 @@
 </row>
 <row name="platform_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
-<default>NULL</default><relation table="Platform" row="id" />
+<default>NULL</default><relation table="platform" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="333" y="102" name="Platform">
+<table x="333" y="102" name="platform">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
