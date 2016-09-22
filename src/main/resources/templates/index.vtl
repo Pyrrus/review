@@ -1,6 +1,10 @@
 #if ($platforms)
-  <div class="row">
+    #set($counter = 0)
+    #set($endCounter = 0)
     #foreach ($platform in $platforms)
+      #if ($counter == 0)
+        <div class="row">
+      #end
       <div class="col-md-4">
         <h2>$platform.getName()</h2>
         <ul>
@@ -12,8 +16,16 @@
         </ul>
         <a href="/$platform.getName()/game/new" class="btn btn-info">Add a New $platform.getName() Game!</a>
       </div>
+      #if ($counter == 2)
+        </div>
+        #set($counter = 0)
+      #elseif ($platforms.size() == $endCounter)
+        </div>
+      #else
+        #set($counter = $counter + 1)
+      #end
+      #set($endCounter = $endCounter + 1)
     #end
-  </div>
 #end
 <br />
 <div class="row">

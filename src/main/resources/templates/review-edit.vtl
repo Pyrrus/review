@@ -1,0 +1,13 @@
+<h1>Edit review for $game.getName() by $review.getName():</h1>
+
+<form class="" action="/$platform.getName()/$game.getName()/review/$review.getId()/edit" method="post">
+  <div class="form-group">
+    <label for="content">Review:</label>
+    <textarea id="content" name="content" type="text" class="form-control" placeholder="Your Review">$review.getContent()</textarea>
+  </div>
+  <button type="submit" class="btn btn-success">Update Review!</button>
+</form>
+
+<form action="/$platform.getName()/$game.getName()/review/$review.getId()/delete" method="post">
+  <button type="submit" class="btn btn-danger">DELETE</button>
+</form>

@@ -101,4 +101,38 @@ public class Game {
       return game;
     }
   }
+
+  public void update(String name, String game_type, String description, String year) {
+    try (Connection con = DB.sql2o.open()) {
+      this.name = name;
+      this.game_type = game_type;
+      this.description = description;
+      this.year = year;
+      String sql = "UPDATE games SET name = :name, game_type = :game_type, description = :description, year = :year WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("name", name)
+      .addParameter("game_type", game_type)
+      .addParameter("description", description)
+      .addParameter("year", year)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
+
+  public void delete() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM reviews WHERE game_id = :game_id";
+      con.createQuery(sql)
+      .addParameter("game_id", id)
+      .executeUpdate();
+
+      sql = "DELETE FROM games WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+
+  }
+
+
 }

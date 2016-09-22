@@ -86,7 +86,6 @@ public class ReviewTest {
     now = new java.sql.Timestamp((created_at).getTime()).toString();
     first = "test";
     firstReview.update(first, now);
-    System.out.println(firstReview.getContent());
     assertEquals(first, firstReview.getContent());
   }
 

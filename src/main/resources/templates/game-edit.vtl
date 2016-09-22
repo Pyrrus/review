@@ -1,0 +1,24 @@
+<h2>Edit $game.getName() for $platform.getName()!</h2>
+<form action="/$platform.getName()/$game.getName()/edit" method="post">
+  <div class="form-group">
+    <label for="name" type="hidden"></label>
+    <input id="name" name="name" type="text" class="form-control" placeholder="Name" value="$game.getName()">
+  </div>
+  <div class="form-group">
+    <label for="game_type" type="hidden"></label>
+    <input id="game_type" name="game_type" type="text" class="form-control" placeholder="Game Type (i.e. first person shooter)" value="$game.getType()">
+  </div>
+  <div class="form-group">
+    <label for="description" type="hidden"></label>
+    <textarea id="description" name="description" type="text" class="form-control" placeholder="Description">$game.getDescription()</textarea>
+  </div>
+  <div class="form-group">
+    <label for="year" type="hidden"></label>
+    <input id="year" name="year" type="date" class="form-control" placeholder="Year" value="$game.getYear()">
+  </div>
+  <button type="submit" class="btn btn-success">Edit $game.getName()</button>
+</form>
+
+<form action="/$platform.getName()/$game.getName()/delete" method="post">
+  <button type="submit" class="btn btn-danger">DELETE</button>
+</form>

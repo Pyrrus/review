@@ -93,5 +93,82 @@ public class App {
       model.put("template", "templates/game.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
+
+    get("/:name/:gamename/review/:id/edit", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Platform platform = Platform.findName(request.params(":name"));
+      Game game = Game.findName(request.params(":gamename"));
+      Review review = Review.find(Integer.parseInt(request.params(":id")));
+      model.put("title", platform.getName() + ", " + game.getName() + " Review Edit by " + review.getName());
+      model.put("header", header);
+      model.put("platform", platform);
+      model.put("game", game);
+      model.put("review", review);
+      model.put("template", "templates/review-edit.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/:name/:gamename/review/:id/edit", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Platform platform = Platform.findName(request.params(":name"));
+      Game game = Game.findName(request.params(":gamename"));
+      Review review = Review.find(Integer.parseInt(request.params(":id")));
+      String content = request.queryParams("content");
+      java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+      java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+      String now = new java.sql.Timestamp((created_at).getTime()).toString();
+      review.update(content, now);
+      String url = "/" + request.params(":name") + "/" + request.params("gamename");
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/:name/:gamename/review/:id/delete", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Platform platform = Platform.findName(request.params(":name"));
+      Game game = Game.findName(request.params(":gamename"));
+      Review review = Review.find(Integer.parseInt(request.params(":id")));
+      review.delete();
+      String url = "/" + request.params(":name") + "/" + request.params("gamename");
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    //GAME STUFF
+    get("/:name/:gamename/edit", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Platform platform = Platform.findName(request.params(":name"));
+      Game game = Game.findName(request.params(":gamename"));
+      model.put("title", "Edit " + platform.getName() + ", " + game.getName());
+      model.put("header", header);
+      model.put("platform", platform);
+      model.put("game", game);
+      model.put("template", "templates/game-edit.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/:name/:gamename/edit", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Platform platform = Platform.findName(request.params(":name"));
+      Game game = Game.findName(request.params(":gamename"));
+      String gameName = request.queryParams("name");
+      String gameType = request.queryParams("game_type");
+      String gameDescription = request.queryParams("description");
+      String gameYear = request.queryParams("year");
+      game.update(gameName, gameType, gameDescription, gameYear);
+      String url = "/" + request.params(":name") + "/" + game.getName();
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/:name/:gamename/delete", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      Platform platform = Platform.findName(request.params(":name"));
+      Game game = Game.findName(request.params(":gamename"));
+      game.delete();
+      String url = "/";
+      response.redirect(url);
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
   }
 }

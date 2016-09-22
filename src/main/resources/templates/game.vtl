@@ -5,6 +5,8 @@
 
 <p>$game.getDescription()</p>
 
+<a href="/$platform.getName()/$game.getName()/edit" class="btn btn-info">Edit $game.getName()</a>
+
 <h2>User reviews:</h2>
 
 #if ($game.getReviews().size() > 0)
@@ -17,6 +19,7 @@
           <p>
             $review.getContent()
           </p>
+          <a href="/$platform.getName()/$game.getName()/review/$review.getId()/edit" class="btn btn-info">Edit $review.getName()'s Review</a>
         </div>
       </li>
     </ul>
