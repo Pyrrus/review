@@ -93,4 +93,12 @@ public class Game {
       .executeAndFetch(Review.class);
     }
   }
+
+  public static Game findName(String name) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM games WHERE name = :name";
+      Game game = con.createQuery(sql).addParameter("name", name).executeAndFetchFirst(Game.class);
+      return game;
+    }
+  }
 }

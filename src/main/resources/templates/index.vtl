@@ -1,0 +1,23 @@
+#if ($platforms)
+  <div class="row">
+    #foreach ($platform in $platforms)
+      <div class="col-md-4">
+        <h2>$platform.getName()</h2>
+        <ul>
+          #if ($platform.getGames())
+            #foreach ($game in $platform.getGames())
+              <li><a href="/$platform.getName()/$game.getName()">$game.getName()</a></li>
+            #end
+          #end
+        </ul>
+        <a href="/$platform.getName()/game/new" class="btn btn-info">Add a New Game to $platform.getName()!</a>
+      </div>
+    #end
+  </div>
+#end
+<br />
+<div class="row">
+  <div class="col-md-12">
+    <a href="/platform/new" class="btn btn-success">Add a New Platform!</a>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<h1>$platform.getName(), $game.getName()</h1>
+
+<p>Game Type: $game.getType()</p>
+<p>Game Year: $game.getYear()</p>
+
+<p>$game.getDescription()</p>
+
+<h2>User reviews:</h2>
+
+#if ($game.getReviews() > 0)
+  #foreach ($review in $game.getReviews())
+    <ul>
+      <li>
+        <div class="user-review">
+          <h4>$review.getName()</h4>
+          <h5>$review.getYear()</h5>
+          <p>
+            $review.getContent()
+          </p>
+        </div>
+      </li>
+    </ul>
+  #end
+#else
+<h3>Be the first to review $game.getName()!</h3>
+#end
+
+<form class="" action="/$platform.getName()/$game.getName()/review" method="post">
+  <div class="form-group">
+    <label for="name" type="hidden"></label>
+    <input id="name" name="name" type="text" class="form-control" placeholder="Your Name">
+  </div>
+  <div class="form-group">
+    <label for="content">Review:</label>
+    <textarea id="content" name="content" type="text" class="form-control" placeholder="Your Review">
+    </textarea>
+  </div>
+  <button type="submit" class="btn btn-success">Submit Review!</button>
+</form>

@@ -55,6 +55,15 @@ public class Platform {
     }
   }
 
+  public static Platform findName(String name) {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM platforms WHERE name = :name";
+      return con.createQuery(sql)
+             .addParameter("name", name)
+             .executeAndFetchFirst(Platform.class);
+    }
+  }
+
   public List<Game> getGames() {
     try (Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM games WHERE platform_id = :id";
