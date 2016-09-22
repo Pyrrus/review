@@ -1,5 +1,6 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.Arrays;
 
 public class GameTest {
 
@@ -73,5 +74,21 @@ public class GameTest {
     secondGame.save();
     Game findGame = Game.find(secondGame.getId());
     assertTrue(findGame.getId() == secondGame.getId());
+  }
+
+  @Test
+  public void getReviews_returnsAllReviewsWithSameGameId_true() {
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+    Game firstGame = new Game("Bloodborne", "Horror 3rd person", "very hard and you will die alot!", "12-3-2014", 1);
+    firstGame.save();
+    Review firstReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, firstGame.getId());
+    firstReview.save();
+    Review secondReview = new Review("bob", "Bloodborne is very easy.", now, firstGame.getId());
+    secondReview.save();
+
+    Review[] reviews = new Review[] { firstReview, secondReview };
+    assertTrue(firstGame.getReviews().containsAll(Arrays.asList(reviews)));
   }
 }

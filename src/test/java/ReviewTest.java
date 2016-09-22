@@ -3,6 +3,8 @@ import java.time.LocalDateTime;
 import org.junit.*;
 import static org.junit.Assert.*;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.sql.Timestamp;
 
 public class ReviewTest {
 
@@ -11,16 +13,63 @@ public class ReviewTest {
 
   @Test
   public void Review_correctlyInstantiates_true() {
-    Review testReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", 1);
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+    Review testReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, 1);
     assertTrue(testReview instanceof Review);
   }
 
-  // @Test
-  // public void getTime_ReturnReviewTime_True() {
-  //   Review testReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", 1);
-  //   DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-  //   String now = LocalDateTime.now().format(formatter);
-  //   String other = testReview.getTime();
-  //   assertEquals(now.equals(other));
-  // }
+  @Test
+  public void getTime_ReturnReviewTime_True() {
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+    Review testReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, 1);
+    String other = testReview.getTime();
+    assertEquals(now, other);
+  }
+
+  @Test
+  public void equals_FirstReviewIsEqualToSecondReview_true() {
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+    Review firstReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, 1);
+    Review secondReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, 1);
+    assertTrue(firstReview.equals(secondReview));
+  }
+
+  @Test
+  public void save_savesTestReviewToDatabase_true() {
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+    Review testReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, 1);
+    testReview.save();
+    assertTrue(testReview.getId() > 0);
+  }
+
+  @Test
+  public void all_saveTestReviewToDatabase_true() {
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+    Review firstReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, 1);
+    firstReview.save();
+    assertTrue(firstReview.equals(Review.all().get(0)));
+  }
+
+  @Test
+  public void find_returnsSameReviewId_true() {
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+    Review firstReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, 1);
+    firstReview.save();
+    Review secondReview = new Review("Adam", "Bloodborne is very challenging. But, very rewarding.", now, 1);
+    secondReview.save();
+    Review savedReview = Review.find(secondReview.getId());
+    assertTrue(secondReview.equals(savedReview));
+  }
 }

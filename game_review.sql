@@ -107,7 +107,7 @@ CREATE TABLE reviews (
     id integer NOT NULL,
     name character varying,
     content text,
-    created_at timestamp without time zone,
+    created_at character varying,
     game_id integer
 );
 

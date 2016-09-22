@@ -84,4 +84,13 @@ public class Game {
       return game;
     }
   }
+
+  public List<Review> getReviews() {
+    try (Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM reviews WHERE game_id = :id";
+      return con.createQuery(sql)
+      .addParameter("id", id)
+      .executeAndFetch(Review.class);
+    }
+  }
 }
