@@ -88,6 +88,7 @@ public class App {
       java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
       String now = new java.sql.Timestamp((created_at).getTime()).toString();
       Review review = new Review(name, content, now, game.getId());
+      review.save();
       response.redirect(url);
       model.put("template", "templates/game.vtl");
       return new ModelAndView(model, layout);

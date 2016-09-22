@@ -85,4 +85,26 @@ public class Review {
       .executeAndFetchFirst(Review.class);
     }
   }
+
+  public void update(String content, String now) {
+    try (Connection con = DB.sql2o.open()) {
+      this.content = content;
+      this.created_at = now;
+      String sql = "UPDATE reviews SET content = :content, created_at = :now WHERE id = :id";
+      con.createQuery(sql)
+      .addParameter("id", this.id)
+      .addParameter("content", content)
+      .addParameter("now", now)
+      .executeUpdate();
+    }
+  }
+
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "DELETE FROM reviews WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+      }
+  }
 }

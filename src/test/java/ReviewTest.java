@@ -71,4 +71,35 @@ public class ReviewTest {
     Review savedReview = Review.find(secondReview.getId());
     assertTrue(secondReview.equals(savedReview));
   }
+
+  @Test
+  public void update_updatesReviewWithSameContent_true() {
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+
+    String first = "BOB THE GEART";
+    Review firstReview = new Review("Adam", first, now, 67);
+    firstReview.save();
+    utilDate = new java.util.Date(System.currentTimeMillis());
+    created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    now = new java.sql.Timestamp((created_at).getTime()).toString();
+    first = "test";
+    firstReview.update(first, now);
+    System.out.println(firstReview.getContent());
+    assertEquals(first, firstReview.getContent());
+  }
+
+  @Test
+  public void delete_deletesReview_true() {
+    java.util.Date utilDate = new java.util.Date(System.currentTimeMillis());
+    java.sql.Date created_at = new java.sql.Date(utilDate.getTime());//May receive error depending on scope of accuracy
+    String now = new java.sql.Timestamp((created_at).getTime()).toString();
+    String first = "BOB THE GEART";
+    Review firstReview = new Review("Adam", first, now, 67);
+    firstReview.save();
+    int id = firstReview.getId();
+    firstReview.delete();
+    assertEquals(null, Review.find(id));
+  }
 }

@@ -4,13 +4,13 @@
       <div class="col-md-4">
         <h2>$platform.getName()</h2>
         <ul>
-          #if ($platform.getGames())
+          #if ($platform.getGames().size() > 0)
             #foreach ($game in $platform.getGames())
               <li><a href="/$platform.getName()/$game.getName()">$game.getName()</a></li>
             #end
           #end
         </ul>
-        <a href="/$platform.getName()/game/new" class="btn btn-info">Add a New Game to $platform.getName()!</a>
+        <a href="/$platform.getName()/game/new" class="btn btn-info">Add a New $platform.getName() Game!</a>
       </div>
     #end
   </div>

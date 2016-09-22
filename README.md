@@ -17,7 +17,7 @@ This program stores words in a personal dictionary and allows you to add multipl
 | Program creates reviews of game entries.               | Super hard!                           | Reviews of Bloodborne (PS4) <ol> <li>Super hard!</li> </ol>                                       |
 | Program creates multiple reviews of game entries.      | Easy game.                            |  Reviews of Bloodborne (PS4) <ol> <li>Super hard!</li> <li>Easy game.</li> </ol>                  |
 | Program updates a review of a game entry.              | Never mind, super difficult.          | Reviews of Bloodborne (PS4) <ol> <li>Super hard!</li> <li>Never mind, super difficult.</li> </ol> |
-| Program deletes a review of a game entry.              | DELETE "Never mind, super difficult." | Reviewsof Bloodborne (PS4) <ol>  <li>Super hard!</li> </ol>                                       |
+| Program deletes a review of a game entry.              | DELETE "Never mind, super difficult." | Reviews of Bloodborne (PS4) <ol>  <li>Super hard!</li> </ol>                                       |
 
 ## Setup/Installation Requirements
 
